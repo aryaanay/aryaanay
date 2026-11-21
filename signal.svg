@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" role="img" aria-labelledby="title">
+<title id="title">aryaanay · AI research and quantitative modeling</title>
+<defs><linearGradient id="field" x2="1" y2="1"><stop stop-color="#08131e"/><stop offset="1" stop-color="#192044"/></linearGradient><linearGradient id="signal"><stop stop-color="#78ffdf"/><stop offset="1" stop-color="#aba4ff"/></linearGradient><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#8599d2" stroke-opacity=".14"/></pattern></defs>
+<style>@media (prefers-reduced-motion: no-preference) {.sweep{animation:orbit 9s linear infinite;transform-origin:746px 160px}@keyframes orbit{to{transform:rotate(360deg)}}}</style>
+<rect width="960" height="320" rx="24" fill="url(#field)"/><rect x="16" y="16" width="928" height="288" rx="14" fill="url(#grid)" stroke="#465976"/><path d="M39 83V39h44M877 281h44v-44" fill="none" stroke="#78ffdf" stroke-width="2"/>
+<g fill="none" stroke="#617caa"><circle cx="746" cy="160" r="114" stroke-dasharray="2 8"/><circle cx="746" cy="160" r="89"/><circle cx="746" cy="160" r="63"/><circle cx="746" cy="160" r="34"/><path d="M616 160h260M746 30v260" opacity=".45"/></g>
+<g class="sweep"><path d="M746 160V71a89 89 0 0 1 72 37Z" fill="#78ffdf" opacity=".2"/><path d="m746 160 72-52" stroke="#78ffdf" stroke-width="2"/><circle cx="818" cy="108" r="5" fill="#78ffdf"/></g>
+<path d="M728 162h9l7-13 7 25 7-12h7" fill="none" stroke="url(#signal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="58" y="166" fill="#f1f7ff" font-family="system-ui,sans-serif" font-size="94" font-weight="750" letter-spacing="-4">aryaanay</text><rect x="62" y="185" width="82" height="4" rx="2" fill="url(#signal)"/><text x="62" y="230" fill="#bcceec" font-family="system-ui,sans-serif" font-size="26">AI research and quantitative modeling</text>
+</svg>
