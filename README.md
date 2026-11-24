@@ -15,6 +15,13 @@ My limit order book notebook models bids, asks, and trades in a synthetic market
 [Open the order book notebook](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OrderBookSimulator_InventoryAwareMarketMaking.ipynb)
 
 <details>
+<summary>What broke in the first version?</summary>
+
+The simulator only checked for fills right after it posted a quote. A fill between strategy steps could leave its inventory count wrong. The fix tracks the order IDs the strategy has placed and checks every new trade for a match. The notebook verifies this by filling a quote between steps and checking that the next step picks it up.
+
+</details>
+
+<details>
 <summary>More quant notebooks</summary>
 
 - [Implied vs. realized volatility forecasting](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OptionsVolatility_ImpliedVsRealizedForecasting.ipynb)
