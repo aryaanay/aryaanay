@@ -1,37 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="920" height="248" viewBox="0 0 920 248" role="img" aria-labelledby="title">
-  <title id="title">aryaanay — Research in code</title>
-  <style>
-    /* Hallmark: technical editorial, dark ink with a mint signal. */
-    /* The illustration supports the linked work below. */
-    :root {
-      --ink: #0c1619; --frame: #334849; --grid: #233637;
-      --white: #f2f8f5; --muted: #a3b9b5; --signal: #91f8ce;
-      --display: system-ui, sans-serif; --mono: ui-monospace, Consolas, monospace;
-    }
-    .field { fill: var(--ink); }
-    .frame { fill: none; stroke: var(--frame); }
-    .grid { fill: none; stroke: var(--grid); }
-    .wordmark { fill: var(--muted); font: 25px var(--mono); }
-    .headline { fill: var(--white); font: 730 66px var(--display); letter-spacing: -3px; }
-    .wave { stroke: var(--signal); stroke-width: 3; fill: none; }
-    .comparison { stroke: var(--muted); stroke-width: 2; stroke-dasharray: 5 7; fill: none; }
-    .point { fill: var(--signal); stroke: var(--ink); stroke-width: 3; }
-    @media (prefers-reduced-motion: no-preference) {
-      .wave { animation: draw 1.65s ease-out both; stroke-dasharray: 1; }
-      .point { animation: appear .35s 1.3s ease-out both; }
-      @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-      @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
-    }
-  </style>
-  <rect class="field" width="920" height="248" rx="18"/>
-  <rect class="frame" x="1" y="1" width="918" height="246" rx="17"/>
-  <text class="wordmark" x="38" y="62">@aryaanay</text>
-  <text class="headline" x="36" y="144">Research in code</text>
-  <path class="frame" d="M38 195H485"/>
-  <g stroke-linecap="round" stroke-linejoin="round">
-    <path class="grid" d="M548 49H878M548 88H878M548 127H878M548 166H878M548 205H878M548 49V205M603 49V205M658 49V205M713 49V205M768 49V205M823 49V205M878 49V205"/>
-    <path class="comparison" d="M548 177L595 153L641 164L684 126L730 131L771 113L816 128L855 104"/>
-    <path class="wave" pathLength="1" d="M548 177L594 165L624 173L675 137L721 148L766 105L814 116L855 68"/>
-    <circle class="point" cx="855" cy="68" r="6"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="256" viewBox="0 0 920 256" role="img" aria-labelledby="title">
+<title id="title">Anay Arya — AI research and market models</title>
+<style>
+  /* Hallmark: technical editorial, cobalt field and mint traces. */
+  /* Keep the name readable at narrow widths. Confine motion to the circuitry. */
+  :root {
+    --ink:#0b1224; --deep:#111c37; --grid:#2e4265; --rim:#3b5570;
+    --paper:#f5f8ef; --secondary:#b5c8da; --mint:#aaffd9; --blue:#5d95ff;
+    --body:system-ui,sans-serif; --mono:ui-monospace,Consolas,monospace;
+  }
+  .name { fill:var(--paper); font:760 86px var(--body); letter-spacing:-4px; }
+  .line { fill:var(--secondary); font:25px var(--body); }
+  .handle { fill:var(--mint); font:21px var(--mono); }
+  .wire { fill:none; stroke:var(--rim); stroke-width:1.4; }
+  .chip { fill:var(--deep); stroke:var(--rim); stroke-width:1.5; }
+  .node { fill:var(--deep); stroke:var(--mint); stroke-width:1.4; }
+  .pulse { display:none; fill:none; stroke:var(--mint); stroke-width:3; stroke-linecap:round; stroke-dasharray:.13 1.87; }
+  @media (prefers-reduced-motion:no-preference) {
+    .pulse { display:inline; animation:send 2.4s cubic-bezier(.28,.6,.33,1) both; }
+    .second { animation-delay:.28s; }
+    .third { animation-delay:.58s; }
+    @keyframes send { from { stroke-dashoffset:.16; } to { stroke-dashoffset:-1.02; } }
+  }
+</style>
+<defs>
+  <linearGradient id="field" x2="1" y2="1"><stop style="stop-color:var(--ink)"/><stop offset="1" style="stop-color:var(--deep)"/></linearGradient>
+  <radialGradient id="ambient"><stop style="stop-color:var(--blue)" stop-opacity=".30"/><stop offset="1" style="stop-color:var(--blue)" stop-opacity="0"/></radialGradient>
+  <pattern id="points" width="19" height="19" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" style="fill:var(--grid)"/></pattern>
+  <clipPath id="frame"><rect width="920" height="256" rx="19"/></clipPath>
+  <linearGradient id="edge"><stop style="stop-color:var(--mint)"/><stop offset="1" style="stop-color:var(--blue)"/></linearGradient>
+</defs>
+<g clip-path="url(#frame)">
+  <rect width="920" height="256" fill="url(#field)"/>
+  <ellipse cx="730" cy="133" rx="255" ry="174" fill="url(#ambient)"/>
+  <path d="M525 0H920V256H475Z" fill="url(#points)"/>
+  <rect x="1" y="1" width="918" height="254" rx="18" fill="none" style="stroke:var(--rim)"/>
+</g>
+<text class="handle" x="45" y="61">@aryaanay</text>
+<text class="name" x="40" y="144">Anay Arya</text>
+<text class="line" x="45" y="187">AI research &amp; market models</text>
+<path d="M46 219H177" stroke="url(#edge)" stroke-width="3" stroke-linecap="round"/>
+<g stroke-linecap="round" stroke-linejoin="round">
+  <path class="wire" d="M514 78h57l43 44h68M530 130h79l35 34h65M547 199h53l44-35M694 87l41-39h58M766 89h45l37-36h30M795 126h64l25-23M766 169h51l40 38h34M742 189l40 37h48"/>
+  <path class="wire" d="M733 65l75 64-75 64-75-64zM733 49l94 80-94 80-94-80z"/>
+  <path class="chip" d="M733 81l56 48-56 48-56-48z"/>
+  <path d="M733 95l40 34-40 34-40-34z" fill="none" stroke="url(#edge)" stroke-width="2"/>
+  <path d="M715 132l12-13 10 14 14-12" fill="none" style="stroke:var(--mint)" stroke-width="2.5"/>
+  <path class="pulse" pathLength="1" d="M514 78h57l43 44h62"/>
+  <path class="pulse second" pathLength="1" d="M547 199h53l44-35h56"/>
+  <path class="pulse third" pathLength="1" d="M789 129h70l25-26"/>
+  <circle class="node" cx="514" cy="78" r="4"/><circle class="node" cx="547" cy="199" r="4"/><circle class="node" cx="884" cy="103" r="4"/>
+  <circle class="node" cx="793" cy="48" r="3"/><circle class="node" cx="891" cy="207" r="3"/>
+</g>
 </svg>
