@@ -1,4 +1,6 @@
-[![Anay Arya. AI research and market models. Jump to featured work.](https://github.com/aryaanay/aryaanay/raw/refs/heads/main/research-header.svg)](#featured-work)
+<picture>
+  <img src="https://github.com/aryaanay/aryaanay/raw/refs/heads/main/research-header.svg" alt="Anay Arya. AI research and market models.">
+</picture>
 
 ## About me
 
@@ -12,7 +14,9 @@ I write Python for AI research and market simulations, and build web projects in
 
 My limit order book notebook models bids, asks, and trades in a synthetic market. It then puts an inventory-aware market maker into that market and tests a case the initial version missed: fills that happen between strategy steps.
 
-[![Simulated order book showing the best bid, best ask, and executed trades over time. Open the source notebook.](order-book-simulation.svg)](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OrderBookSimulator_InventoryAwareMarketMaking.ipynb)
+<picture>
+  <img src="order-book-simulation.svg" alt="Simulated order book showing the best bid, best ask, and executed trades over time.">
+</picture>
 
 [Open the order book notebook](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OrderBookSimulator_InventoryAwareMarketMaking.ipynb)
 
