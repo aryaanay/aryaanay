@@ -25,13 +25,16 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/profile_activity.py
+      - name: Refresh notebook graphs
+        continue-on-error: true
+        run: python3 scripts/refresh_quant_figures.py
       - name: Publish changes
         run: |
-          if git diff --quiet -- README.md; then
+          if git diff --quiet -- README.md quant-experiments.svg order-book-simulation.svg; then
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add README.md
-          git commit -m 'Refresh public profile activity'
+          git add README.md quant-experiments.svg order-book-simulation.svg
+          git commit -m 'Refresh profile activity and notebook graphs'
           git push origin HEAD:main
