@@ -9,9 +9,7 @@
 
 ## About me
 
-I’m a student at UW Seattle, where I joined through the Robinson Center. At the Applied Analytics Club, I lead a student research project on whether public filings back up the AI claims companies make. I’m also involved in the Algorithmic Trading Club, and my team placed second in UW’s 2026 ICPC round.
-
-I use Python for research and market simulations, and TypeScript for web projects. I also publish reusable skills for Codex.
+I write Python for AI research and market simulations, and build web projects in TypeScript. Right now I’m working out how to test what public companies say about AI against what their filings and other public records show.
 
 [Published skills](#published-skills) | [Featured work](#featured-work) | [Recent activity](#recent-public-activity) | [LinkedIn](https://www.linkedin.com/in/anay-arya/)
 
