@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="740" height="838" viewBox="0 0 740 838" role="img" aria-labelledby="title desc">
 <title id="title">Inventory cap sensitivity and bank-pair backtest stability</title>
-<desc id="desc">As the inventory cap tightens from 500 to 50, simulated profit falls from 5,818 to 1,105 dollars while time at the cap rises from 19.3 to 65.3 percent. Four of nine bank pairs change the sign of their Sharpe ratio between training and testing.</desc>
+<desc id="desc">At caps of 500 and 50, simulated P&amp;L was 5,818 and 1,105 dollars. Time at the cap was 19.3% and 65.3%. 4 of 9 bank pairs changed Sharpe ratio sign between periods.</desc>
 <style>
 /* Hallmark: slate research figure with mint and warm accents. */
 :root{--base:#111a2a;--rim:#34485f;--grid:#293a4f;--text:#f0f5f8;--muted:#9db4c8;--mint:#8cface;--amber:#ffca86;--body:system-ui,sans-serif}
