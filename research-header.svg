@@ -16,10 +16,16 @@
   .node { fill:var(--deep); stroke:var(--mint); stroke-width:1.4; }
   .pulse { display:none; fill:none; stroke:var(--mint); stroke-width:3; stroke-linecap:round; stroke-dasharray:.13 1.87; }
   @media (prefers-reduced-motion:no-preference) {
-    .pulse { display:inline; animation:send 2.4s cubic-bezier(.28,.6,.33,1) both; }
-    .second { animation-delay:.28s; }
-    .third { animation-delay:.58s; }
-    @keyframes send { from { stroke-dashoffset:.16; } to { stroke-dashoffset:-1.02; } }
+    .pulse { display:inline; animation:send 4.8s linear infinite; animation-delay:-.25s; }
+    .second { animation-delay:-1.85s; }
+    .third { animation-delay:-3.45s; }
+    .core-signal { animation:glow 4.8s ease-in-out infinite; }
+    @keyframes send {
+      0% { opacity:0; stroke-dashoffset:.16; }
+      12% { opacity:1; }
+      63%,100% { opacity:0; stroke-dashoffset:-1.02; }
+    }
+    @keyframes glow { 0%,100% { opacity:.66; } 45% { opacity:1; } }
   }
 </style>
 <defs>
@@ -44,7 +50,7 @@
   <path class="wire" d="M733 65l75 64-75 64-75-64zM733 49l94 80-94 80-94-80z"/>
   <path class="chip" d="M733 81l56 48-56 48-56-48z"/>
   <path d="M733 95l40 34-40 34-40-34z" fill="none" stroke="url(#edge)" stroke-width="2"/>
-  <path d="M715 132l12-13 10 14 14-12" fill="none" style="stroke:var(--mint)" stroke-width="2.5"/>
+  <path class="core-signal" d="M715 132l12-13 10 14 14-12" fill="none" style="stroke:var(--mint)" stroke-width="2.5"/>
   <path class="pulse" pathLength="1" d="M514 78h57l43 44h62"/>
   <path class="pulse second" pathLength="1" d="M547 199h53l44-35h56"/>
   <path class="pulse third" pathLength="1" d="M789 129h70l25-26"/>
