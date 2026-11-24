@@ -1,4 +1,4 @@
-[![Anay Arya. AI research and market models. Jump to featured work.](research-header.svg)](#featured-work)
+[![Anay Arya. AI research and market models. Jump to featured work.](https://github.com/aryaanay/aryaanay/raw/refs/heads/main/research-header.svg)](#featured-work)
 
 ## About me
 
