@@ -9,7 +9,7 @@
 
 ## About me
 
-I write Python for AI research and market simulations, and build web projects in TypeScript. Right now I’m working out how to test what public companies say about AI against what their filings and other public records show.
+I’m interested in how people make decisions under uncertainty, especially in finance and technology. I like thinking about what data can tell us and where judgment still matters.
 
 [Published skills](#published-skills) | [Featured work](#featured-work) | [Recent activity](#recent-public-activity) | [LinkedIn](https://www.linkedin.com/in/anay-arya/)
 
