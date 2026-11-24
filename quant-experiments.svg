@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="838" viewBox="0 0 740 838" role="img" aria-labelledby="title desc">
+<title id="title">Inventory cap sensitivity and bank-pair backtest stability</title>
+<desc id="desc">As the inventory cap tightens from 500 to 50, simulated profit falls from 5,818 to 1,105 dollars while time at the cap rises from 19.3 to 65.3 percent. Four of nine bank pairs change the sign of their Sharpe ratio between training and testing.</desc>
+<style>
+/* Hallmark: slate research figure with mint and warm accents. */
+:root{--base:#111a2a;--rim:#34485f;--grid:#293a4f;--text:#f0f5f8;--muted:#9db4c8;--mint:#8cface;--amber:#ffca86;--body:system-ui,sans-serif}
+text{fill:var(--text);font:22px var(--body);font-variant-numeric:tabular-nums}.title{font-weight:750;font-size:30px}.minor{fill:var(--muted);font-size:20px}.base{fill:var(--base);stroke:var(--rim)}.track{fill:var(--grid)}.mint{fill:var(--mint)}.amber{fill:var(--amber)}.train{fill:var(--base);stroke:var(--muted);stroke-width:2.5}.axis{stroke:var(--rim);stroke-width:3}.cross{stroke:var(--amber);stroke-width:2;stroke-opacity:.8}.grid{stroke:var(--grid)}.zero{stroke:var(--muted);stroke-dasharray:4 5}
+</style>
+<rect class="base" x="1" y="1" width="738" height="317" rx="17"/>
+<text class="title" x="34" y="51">What changes when the inventory cap tightens?</text>
+<text class="minor" x="34" y="91">Cap</text><text class="minor" x="137" y="91">Simulated P&amp;L</text><text class="minor" x="464" y="91">Time at cap</text>
+<text x="34" y="138">500</text><rect class="track" x="137" y="124" width="151" height="14" rx="7"/><rect class="mint" x="137" y="124" width="146.4" height="14" rx="7"/><text x="308" y="138">$5,818</text><rect class="track" x="464" y="124" width="145" height="14" rx="7"/><rect class="amber" x="464" y="124" width="28.0" height="14" rx="7"/><text x="627" y="138">19.3%</text>
+<text x="34" y="181">200</text><rect class="track" x="137" y="167" width="151" height="14" rx="7"/><rect class="mint" x="137" y="167" width="79.8" height="14" rx="7"/><text x="308" y="181">$3,172</text><rect class="track" x="464" y="167" width="145" height="14" rx="7"/><rect class="amber" x="464" y="167" width="49.4" height="14" rx="7"/><text x="627" y="181">34.1%</text>
+<text x="34" y="224">100</text><rect class="track" x="137" y="210" width="151" height="14" rx="7"/><rect class="mint" x="137" y="210" width="48.0" height="14" rx="7"/><text x="308" y="224">$1,907</text><rect class="track" x="464" y="210" width="145" height="14" rx="7"/><rect class="amber" x="464" y="210" width="73.2" height="14" rx="7"/><text x="627" y="224">50.5%</text>
+<text x="34" y="267">50</text><rect class="track" x="137" y="253" width="151" height="14" rx="7"/><rect class="mint" x="137" y="253" width="27.8" height="14" rx="7"/><text x="308" y="267">$1,105</text><rect class="track" x="464" y="253" width="145" height="14" rx="7"/><rect class="amber" x="464" y="253" width="94.7" height="14" rx="7"/><text x="627" y="267">65.3%</text>
+<text class="minor" x="34" y="285">One simulated market path, 3,000 steps</text>
+<rect class="base" x="1" y="335" width="738" height="502" rx="17"/>
+<text class="title" x="34" y="384">Bank pairs changed across periods</text>
+<circle class="train" cx="41" cy="416" r="6"/><text class="minor" x="56" y="423">Train: before 2020</text><circle class="mint" cx="298" cy="416" r="7"/><text class="minor" x="314" y="423">Test: 2020 onward</text>
+<line class="grid" x1="221" x2="221" y1="443" y2="764"/><text class="minor" text-anchor="middle" x="221" y="791">-0.25</text>
+<line class="zero" x1="308" x2="308" y1="443" y2="764"/><text class="minor" text-anchor="middle" x="308" y="791">0</text>
+<line class="grid" x1="395" x2="395" y1="443" y2="764"/><text class="minor" text-anchor="middle" x="395" y="791">0.25</text>
+<line class="grid" x1="481" x2="481" y1="443" y2="764"/><text class="minor" text-anchor="middle" x="481" y="791">0.5</text>
+<line class="grid" x1="568" x2="568" y1="443" y2="764"/><text class="minor" text-anchor="middle" x="568" y="791">0.75</text>
+<line class="grid" x1="655" x2="655" y1="443" y2="764"/><text class="minor" text-anchor="middle" x="655" y="791">1</text>
+<text x="34" y="470">FITB–PNC</text><line class="cross" x1="297" x2="611" y1="463" y2="463"/><circle class="train" cx="297" cy="463" r="6"/><circle class="mint" cx="611" cy="463" r="7"/>
+<text x="34" y="505">BAC–PNC</text><line class="cross" x1="244" x2="365" y1="498" y2="498"/><circle class="train" cx="244" cy="498" r="6"/><circle class="mint" cx="365" cy="498" r="7"/>
+<text x="34" y="540">KEY–ZION</text><line class="cross" x1="454" x2="280" y1="533" y2="533"/><circle class="train" cx="454" cy="533" r="6"/><circle class="mint" cx="280" cy="533" r="7"/>
+<text x="34" y="575">BAC–FITB</text><line class="axis" x1="475" x2="336" y1="568" y2="568"/><circle class="train" cx="475" cy="568" r="6"/><circle class="mint" cx="336" cy="568" r="7"/>
+<text x="34" y="610">BAC–RF</text><line class="axis" x1="429" x2="364" y1="603" y2="603"/><circle class="train" cx="429" cy="603" r="6"/><circle class="mint" cx="364" cy="603" r="7"/>
+<text x="34" y="645">HBAN–JPM</text><line class="cross" x1="450" x2="235" y1="638" y2="638"/><circle class="train" cx="450" cy="638" r="6"/><circle class="mint" cx="235" cy="638" r="7"/>
+<text x="34" y="680">TFC–ZION</text><line class="axis" x1="669" x2="466" y1="673" y2="673"/><circle class="train" cx="669" cy="673" r="6"/><circle class="mint" cx="466" cy="673" r="7"/>
+<text x="34" y="715">HBAN–RF</text><line class="axis" x1="487" x2="339" y1="708" y2="708"/><circle class="train" cx="487" cy="708" r="6"/><circle class="mint" cx="339" cy="708" r="7"/>
+<text x="34" y="750">HBAN–PNC</text><line class="axis" x1="431" x2="401" y1="743" y2="743"/><circle class="train" cx="431" cy="743" r="6"/><circle class="mint" cx="401" cy="743" r="7"/>
+<text class="minor" text-anchor="middle" x="387" y="816">Sharpe ratio</text>
+</svg>
