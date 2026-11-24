@@ -5,13 +5,19 @@
 </p>
 
 <h1 align="center">Anay Arya</h1>
-<p align="center">AI research and market models</p>
+<p align="center">University of Washington, Seattle<br>AI research, quantitative modeling, and developer tools</p>
 
 ## About me
 
-I write Python for AI research and market simulations, and build web projects in TypeScript. Right now I’m working out how to test what public companies say about AI against what their filings and other public records show.
+I’m a student at UW Seattle, where I joined through the Robinson Center. At the Applied Analytics Club, I lead a student research project on whether public filings back up the AI claims companies make. I’m also involved in the Algorithmic Trading Club, and my team placed second in UW’s 2026 ICPC round.
 
-[Featured work](#featured-work) | [Recent activity](#recent-public-activity) | [All repositories](https://github.com/aryaanay?tab=repositories)
+I use Python for research and market simulations, and TypeScript for web projects. I also publish reusable skills for Codex.
+
+[Published skills](#published-skills) | [Featured work](#featured-work) | [Recent activity](#recent-public-activity) | [LinkedIn](https://www.linkedin.com/in/anay-arya/)
+
+## Published skills
+
+**[Build, Review, and Release](https://github.com/aryaanay/build-review-release#readme)** is a reusable Codex skill for planning a project, testing it, and checking that it’s ready to publish. It uses the tools already in your workspace. The repository includes setup instructions for using it across projects or sharing it with a team.
 
 ## Featured work
 
@@ -57,10 +63,9 @@ flowchart LR
 
 [Read the research plan](https://github.com/aryaanay/ai-narrative-reality-gap#plan) | [See the data sources](https://github.com/aryaanay/ai-narrative-reality-gap#data)
 
-### Other projects
+### CommUHub
 
-- [Build, Review, and Release](https://github.com/aryaanay/build-review-release#readme) is a Codex skill for planning projects, testing them, and checking what’s ready to publish.
-- [TSA Webmaster](https://github.com/aryaanay/tsa-webmaster#readme) is a Next.js project with instructions to run it locally.
+[CommUHub](https://tsa-webmaster-eta.vercel.app/) is a Next.js project built to make local resources and events easier to find in one place.
 
 ## Recent public activity
 
@@ -74,4 +79,4 @@ flowchart LR
 
 ## Get in touch
 
-Found a bug or want to discuss a method? Open an issue in the relevant repository.
+If you find a bug or want to discuss a method, open an issue in the relevant repository. [Browse all repositories](https://github.com/aryaanay?tab=repositories).
