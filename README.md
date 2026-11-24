@@ -20,10 +20,6 @@ My limit order book notebook models bids, asks, and trades in a synthetic market
 
 [Open the order book notebook](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OrderBookSimulator_InventoryAwareMarketMaking.ipynb)
 
-<picture>
-  <img src="order-book-replay.svg" alt="An illustrative market buy for five units fills two at $100.02 and then three at $100.03.">
-</picture>
-
 <details>
 <summary>What broke in the first version?</summary>
 
