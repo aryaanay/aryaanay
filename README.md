@@ -1,34 +1,46 @@
-<img src="research-header.svg" alt="aryaanay — Research in code" width="920">
+# Anay Arya
 
-# About me
+I write Python for AI research and market simulations, and build web projects in TypeScript. Right now I’m working out how to test what public companies say about AI against what their filings and other public records show.
 
-I’m aryaanay. I work on AI research, quantitative models, and web projects. My current research asks how to measure the gap between what public companies say about AI and what their filings and other public records show.
-
-**Explore** &nbsp; [AI research](#ai-narrative-reality-gap) &nbsp; / &nbsp; [Quant notebooks](#quantitative-finance-model-development) &nbsp; / &nbsp; [Web development](#tsa-webmaster)
-
-[Recent activity](#recent-public-activity) | [All repositories](https://github.com/aryaanay?tab=repositories)
+[Featured work](#featured-work) | [Recent activity](#recent-public-activity) | [All repositories](https://github.com/aryaanay?tab=repositories)
 
 ## Featured work
 
-### [AI Narrative Reality Gap](https://github.com/aryaanay/ai-narrative-reality-gap#readme)
+### Can a market maker manage inventory while quoting both sides?
 
-Can public evidence of AI investment help explain how markets respond to corporate AI claims? This Python project sets out a research question, data sources, and a plan for a transparent score. The public repository is at the research-design stage.
+My limit order book notebook models bids, asks, and trades in a synthetic market. It then puts an inventory-aware market maker into that market and tests a case the initial version missed: fills that happen between strategy steps.
 
-### [Quantitative Finance Model Development](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio)
-
-A Jupyter notebook portfolio on market microstructure, volatility forecasting, and systematic trading. Start with the [inventory-aware order book simulator](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OrderBookSimulator_InventoryAwareMarketMaking.ipynb), the [implied vs. realized volatility notebook](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OptionsVolatility_ImpliedVsRealizedForecasting.ipynb), or the [pairs trading notebook](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/PairsTradingSystem_StatisticalArbitrage.ipynb).
+[Open the order book notebook and simulation plot](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OrderBookSimulator_InventoryAwareMarketMaking.ipynb)
 
 <details>
 <summary>More quant notebooks</summary>
 
+- [Implied vs. realized volatility forecasting](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OptionsVolatility_ImpliedVsRealizedForecasting.ipynb)
+- [Pairs trading and statistical arbitrage](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/PairsTradingSystem_StatisticalArbitrage.ipynb)
 - [Market regime detection with a hidden Markov model](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/RegimeDetection_HMMBasedMarketRegimeStrategy.ipynb)
 - [Hybrid cryptocurrency price prediction](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/CryptoPricePredictionHybridModel.ipynb)
 
 </details>
 
-### [TSA Webmaster](https://github.com/aryaanay/tsa-webmaster#readme)
+### What do corporate AI claims tell us about future returns?
 
-A TypeScript and Next.js web project. The repository includes the source and instructions for running it locally.
+[AI Narrative Reality Gap](https://github.com/aryaanay/ai-narrative-reality-gap#readme) lays out a study of S&P 100 companies. The plan compares a score based on evidence behind AI claims with a baseline that counts AI keywords. Data collection is next.
+
+```mermaid
+flowchart LR
+    A[Public filings] --> B[Extract AI claims]
+    B --> C[Score supporting evidence]
+    B --> D[Count AI keywords]
+    C --> E[Compare against later returns]
+    D --> E
+```
+
+[Read the research plan](https://github.com/aryaanay/ai-narrative-reality-gap#plan) | [See the data sources](https://github.com/aryaanay/ai-narrative-reality-gap#data)
+
+### Other projects
+
+- [Build, Review, and Release](https://github.com/aryaanay/build-review-release#readme) is a Codex skill for planning projects, testing them, and checking what’s ready to publish.
+- [TSA Webmaster](https://github.com/aryaanay/tsa-webmaster#readme) is a Next.js project with instructions to run it locally.
 
 ## Recent public activity
 
@@ -40,5 +52,4 @@ A TypeScript and Next.js web project. The repository includes the source and ins
 
 ## Get in touch
 
-Found a bug or have a question about a project? Open an issue in the relevant repository so the conversation stays with the work.
-
+Found a bug or want to discuss a method? Open an issue in the relevant repository.
