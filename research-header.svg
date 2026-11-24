@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="248" viewBox="0 0 920 248" role="img" aria-labelledby="title">
+  <title id="title">aryaanay — Research in code</title>
+  <style>
+    /* Hallmark: technical editorial, dark ink with a mint signal. */
+    /* The illustration supports the linked work below. */
+    :root {
+      --ink: #0c1619; --frame: #334849; --grid: #233637;
+      --white: #f2f8f5; --muted: #a3b9b5; --signal: #91f8ce;
+      --display: system-ui, sans-serif; --mono: ui-monospace, Consolas, monospace;
+    }
+    .field { fill: var(--ink); }
+    .frame { fill: none; stroke: var(--frame); }
+    .grid { fill: none; stroke: var(--grid); }
+    .wordmark { fill: var(--muted); font: 25px var(--mono); }
+    .headline { fill: var(--white); font: 730 66px var(--display); letter-spacing: -3px; }
+    .wave { stroke: var(--signal); stroke-width: 3; fill: none; }
+    .comparison { stroke: var(--muted); stroke-width: 2; stroke-dasharray: 5 7; fill: none; }
+    .point { fill: var(--signal); stroke: var(--ink); stroke-width: 3; }
+    @media (prefers-reduced-motion: no-preference) {
+      .wave { animation: draw 1.65s ease-out both; stroke-dasharray: 1; }
+      .point { animation: appear .35s 1.3s ease-out both; }
+      @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+      @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+    }
+  </style>
+  <rect class="field" width="920" height="248" rx="18"/>
+  <rect class="frame" x="1" y="1" width="918" height="246" rx="17"/>
+  <text class="wordmark" x="38" y="62">@aryaanay</text>
+  <text class="headline" x="36" y="144">Research in code</text>
+  <path class="frame" d="M38 195H485"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path class="grid" d="M548 49H878M548 88H878M548 127H878M548 166H878M548 205H878M548 49V205M603 49V205M658 49V205M713 49V205M768 49V205M823 49V205M878 49V205"/>
+    <path class="comparison" d="M548 177L595 153L641 164L684 126L730 131L771 113L816 128L855 104"/>
+    <path class="wave" pathLength="1" d="M548 177L594 165L624 173L675 137L721 148L766 105L814 116L855 68"/>
+    <circle class="point" cx="855" cy="68" r="6"/>
+  </g>
+</svg>
