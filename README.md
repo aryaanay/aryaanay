@@ -21,7 +21,9 @@ A TypeScript and Next.js web project. The repository includes the source and ins
 ## Recent public activity
 
 <!-- activity:start -->
-The next profile refresh will populate this section.
+- **Nov 24, 2026** — Opened repository in [build-review-release](https://github.com/aryaanay/build-review-release)
+- **Nov 19, 2026** — Updated code in [ai-narrative-reality-gap](https://github.com/aryaanay/ai-narrative-reality-gap/commits)
+- **Nov 19, 2026** — Opened repository in [ai-narrative-reality-gap](https://github.com/aryaanay/ai-narrative-reality-gap)
 <!-- activity:end -->
 
 ## Get in touch
