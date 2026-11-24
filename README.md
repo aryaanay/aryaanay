@@ -1,6 +1,11 @@
-<picture>
-  <img src="https://github.com/aryaanay/aryaanay/raw/refs/heads/main/research-header.svg" alt="Anay Arya. AI research and market models.">
-</picture>
+<p align="center">
+  <picture>
+    <img src="https://github.com/aryaanay/aryaanay/raw/refs/heads/main/lorenz-attractor.svg" width="286" height="158" alt="Dotted Lorenz attractor with a moving highlight.">
+  </picture>
+</p>
+
+<h1 align="center">Anay Arya</h1>
+<p align="center">AI research and market models</p>
 
 ## About me
 
