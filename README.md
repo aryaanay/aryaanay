@@ -1,4 +1,6 @@
-# Anay Arya
+[![Anay Arya. AI research and market models. Jump to featured work.](research-header.svg)](#featured-work)
+
+## About me
 
 I write Python for AI research and market simulations, and build web projects in TypeScript. Right now I’m working out how to test what public companies say about AI against what their filings and other public records show.
 
