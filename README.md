@@ -24,14 +24,16 @@ I’m interested in how people make decisions under uncertainty, especially in f
   <img src="tech-stack-matrix.svg" alt="Copper dot-matrix logos cycling through the tools listed below.">
 </picture>
 
-<!-- <details> -->
+<details>
 <summary>Tools by category</summary>
 
+<!-- tools:start -->
 **Research** · Jupyter, NumPy, pandas, Python, scikit-learn, SciPy, Streamlit  
 **Web** · Framer Motion, Next.js, React, Supabase, Tailwind CSS, TypeScript  
 **Automation** · GitHub Actions
+<!-- tools:end -->
 
-<!-- </details> -->
+</details>
 
 ### Languages
 
@@ -41,6 +43,21 @@ Share of language bytes across my public project repositories.
   <img src="language-matrix.svg" alt="Dot-matrix bars comparing language shares. Exact percentages follow.">
 </picture>
 
+<details>
+<summary>Exact percentages</summary>
+
+<!-- languages:start -->
+| Language | Share |
+| :--- | ---: |
+| TypeScript | 49.0% |
+| Jupyter Notebook | 47.4% |
+| JavaScript | 1.6% |
+| CSS | 1.5% |
+| PLpgSQL | 0.5% |
+| Other | &lt;0.1% |
+<!-- languages:end -->
+
+</details>
 
 ## Featured work
 
@@ -62,4 +79,46 @@ The simulator only checked for fills right after it posted a quote. A fill betwe
 </details>
 
 <details>
-<details>
+<summary>More quant notebooks</summary>
+
+- [Implied vs. realized volatility forecasting](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OptionsVolatility_ImpliedVsRealizedForecasting.ipynb)
+- [Pairs trading and statistical arbitrage](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/PairsTradingSystem_StatisticalArbitrage.ipynb)
+- [Market regime detection with a hidden Markov model](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/RegimeDetection_HMMBasedMarketRegimeStrategy.ipynb)
+- [Hybrid cryptocurrency price prediction](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/CryptoPricePredictionHybridModel.ipynb)
+
+</details>
+
+### AI Narrative Reality Gap
+
+[AI Narrative Reality Gap](https://github.com/aryaanay/ai-narrative-reality-gap#readme) lays out a study of S&P 100 companies. The plan compares a score based on evidence behind AI claims with a baseline that counts AI keywords. Data collection is next.
+
+```mermaid
+flowchart LR
+    A[Public filings] --> B[Extract AI claims]
+    B --> C[Score supporting evidence]
+    B --> D[Count AI keywords]
+    C --> E[Compare against later returns]
+    D --> E
+```
+
+[Read the research plan](https://github.com/aryaanay/ai-narrative-reality-gap#plan) | [See the data sources](https://github.com/aryaanay/ai-narrative-reality-gap#data)
+
+### CommUHub
+
+[CommUHub](https://github.com/aryaanay/commhub) is a Next.js project built to make local resources and events easier to find in one place.
+
+**4th place**, Technology Student Association National Conference, 2026.
+
+## Recent public activity
+
+<!-- activity:start -->
+- **Nov 24, 2026** — Opened repository in [careerops-public-feed](https://github.com/aryaanay/careerops-public-feed)
+- **Nov 24, 2026** — Updated code in [build-review-release](https://github.com/aryaanay/build-review-release/commits)
+- **Nov 24, 2026** — Opened repository in [build-review-release](https://github.com/aryaanay/build-review-release)
+- **Nov 19, 2026** — Updated code in [ai-narrative-reality-gap](https://github.com/aryaanay/ai-narrative-reality-gap/commits)
+- **Nov 19, 2026** — Opened repository in [ai-narrative-reality-gap](https://github.com/aryaanay/ai-narrative-reality-gap)
+<!-- activity:end -->
+
+## Get in touch
+
+If you find a bug or want to discuss a method, open an issue in the relevant repository. [Browse all repositories](https://github.com/aryaanay?tab=repositories).
