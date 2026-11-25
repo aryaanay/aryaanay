@@ -27,8 +27,8 @@ I’m interested in how people make decisions under uncertainty, especially in f
 <details>
 <summary>Tools by category</summary>
 
-**Research** · Python, Jupyter  
-**Web** · TypeScript, React, Next.js, Supabase  
+**Research** · Jupyter, NumPy, pandas, Python, scikit-learn, SciPy, Streamlit  
+**Web** · Framer, Next.js, React, Supabase, Tailwind CSS, TypeScript  
 **Automation** · GitHub Actions
 
 </details>
