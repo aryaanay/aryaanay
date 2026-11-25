@@ -26,13 +26,13 @@ I’m interested in how people make decisions under uncertainty, especially in f
 
 ### Languages
 
-Share of language bytes detected by GitHub across the four featured public repositories.
+Share of language bytes across all repositories.
 
 <picture>
   <img src="language-matrix.svg" alt="Dot-matrix bars comparing language shares. Exact percentages follow.">
 </picture>
 
-<details>
+<!-- <details>
 <summary>Exact percentages</summary>
 
 <!-- languages:start -->
@@ -46,7 +46,7 @@ Share of language bytes detected by GitHub across the four featured public repos
 | Other | &lt;0.1% |
 <!-- languages:end -->
 
-</details>
+</details> -->
 
 ## Featured work
 
