@@ -23,22 +23,31 @@ REPO = re.compile(r"[A-Za-z0-9-]+/[A-Za-z0-9_.-]+")
 DISCUSSION = re.compile(r"https://github\.com/[A-Za-z0-9-]+/[A-Za-z0-9_.-]+/discussions/[1-9][0-9]*")
 
 
-# Count only the featured repositories that are public at refresh time.
-FEATURED = (
-    "build-review-release",
-    "Quantitative-Finance-Model-Development-Portfolio",
-    "ai-narrative-reality-gap",
-    "commhub",
-)
+def owned_public_repos(repos):
+    return [
+        repo for repo in repos
+        if repo.get("private") is False and repo.get("fork") is False
+        and REPO.fullmatch(repo["full_name"])
+        and repo["full_name"].lower().startswith(f"{OWNER}/")
+        and repo["full_name"].lower() != PROFILE
+    ]
+
+
+def list_public_repos():
+    repos = []
+    page = 1
+    while True:
+        batch = request(f"users/{OWNER}/repos?type=owner&sort=full_name&per_page=100&page={page}")
+        repos.extend(batch)
+        if len(batch) < 100:
+            return repos
+        page += 1
 
 
 def render_languages(repos):
-    public = {repo["full_name"].lower() for repo in repos if repo.get("private") is False}
     counts = Counter()
-    for slug in FEATURED:
-        name = f"{OWNER}/{slug}"
-        if name.lower() not in public:
-            continue
+    for repo in owned_public_repos(repos):
+        name = repo["full_name"]
         languages = request(f"repos/{name}/languages")
         if not isinstance(languages, dict) or any(
             type(amount) is not int or amount < 0 for amount in languages.values()
@@ -48,7 +57,7 @@ def render_languages(repos):
 
     total = counts.total()
     if not total:
-        return "GitHub has no language data for the featured repositories.", language_matrix([], 0)
+        return "GitHub has no language data for the public project repositories.", language_matrix([], 0)
     ranked = sorted(counts.items(), key=lambda row: (-row[1], row[0].lower()))
     rows = ranked[:5]
     if len(ranked) > 5:
@@ -84,7 +93,7 @@ def language_matrix(rows, total):
         content.append('<text x="6" y="26">No detected language data</text>')
     height = max(38, len(rows) * 30 + 8)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="500" height="{height}" viewBox="0 0 500 {height}">
-<title>Language shares for featured public repositories</title>
+<title>Language shares for public project repositories</title>
 <style>
 :root {{ --ink:#364451; --track:#abb6c0; --lit:#a54431; --sweep:#d96b46; }}
 @media (prefers-color-scheme: dark) {{
@@ -148,17 +157,16 @@ def manifest_packages(repo, entry):
 
 
 def detected_stack(repos):
-    available = {
-        repo["full_name"].lower(): repo["default_branch"]
-        for repo in repos if repo.get("private") is False
-    }
     names = {"Research": set(), "Web": set(), "Automation": {"GitHub Actions"}}
-    for slug in FEATURED:
-        repo = f"{OWNER}/{slug}"
-        branch = available.get(repo.lower())
-        if branch is None:
-            continue
-        tree = request(f"repos/{repo}/git/trees/{quote(branch, safe='')}?recursive=1")
+    for metadata in owned_public_repos(repos):
+        repo = metadata["full_name"]
+        branch = quote(metadata["default_branch"], safe="")
+        try:
+            tree = request(f"repos/{repo}/git/trees/{branch}?recursive=1")
+        except HTTPError as exc:
+            if exc.code in (404, 409):
+                continue  # Unavailable or empty default branch.
+            raise
         if tree.get("truncated"):
             raise ValueError(f"Incomplete file tree for {repo}")
         for entry in tree["tree"]:
@@ -328,7 +336,7 @@ def refresh(readme, content, start=START, end=END):
 
 
 if __name__ == "__main__":
-    repos = request(f"users/{OWNER}/repos?type=owner&sort=updated&per_page=100")
+    repos = list_public_repos()
     events = request(f"users/{OWNER}/events/public?per_page=100")
     posts = []
     try:
