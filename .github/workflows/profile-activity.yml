@@ -6,6 +6,7 @@ on:
   push:
     branches: [main]
     paths:
+      - README.md
       - .github/workflows/profile-activity.yml
       - scripts/profile_activity.py
 
@@ -33,6 +34,7 @@ jobs:
         run: |
           git add README.md quant-experiments.svg order-book-simulation.svg
           if [ -f language-matrix.svg ]; then git add language-matrix.svg; fi
+          if [ -f tech-stack-matrix.svg ]; then git add tech-stack-matrix.svg; fi
           if git diff --cached --quiet; then
             exit 0
           fi
