@@ -63,7 +63,7 @@ flowchart LR
 
 ### CommUHub
 
-[CommUHub](https://github.com/aryaanay/commhub) is a Next.js project built to make local resources and events easier to find in one place.
+[CommUHub](https://github.com/aryaanay/commhub) is a Next.js project built to make local resources and events easier to find in one place. 4th Place - Technology Student Association (TSA) National Conference 2026
 
 ## Recent public activity
 
