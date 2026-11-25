@@ -35,7 +35,7 @@ I’m interested in how people make decisions under uncertainty, especially in f
 
 ### Languages
 
-Share of language bytes across all repositories.
+Share of language bytes across my public project repositories.
 
 <picture>
   <img src="language-matrix.svg" alt="Dot-matrix bars comparing language shares. Exact percentages follow.">
