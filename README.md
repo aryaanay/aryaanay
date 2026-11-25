@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">Anay Arya</h1>
-<p align="center">University of Washington, Seattle<br>AI research, quantitative modeling, and developer tools</p>
+<p align="center">University of Washington, Seattle<br>AI research, quantitative modeling, and developer tools – ICPC Washington Top 10</p>
 
 ## About me
 
