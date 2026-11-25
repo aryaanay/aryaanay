@@ -29,7 +29,14 @@ I’m interested in how people make decisions under uncertainty, especially in f
 Share of language bytes detected by GitHub across the four featured public repositories.
 
 <!-- languages:start -->
-Language breakdown updates with the profile refresh.
+| Language | Share |
+| :--- | ---: |
+| TypeScript | 49.0% |
+| Jupyter Notebook | 47.4% |
+| JavaScript | 1.6% |
+| CSS | 1.5% |
+| PLpgSQL | 0.5% |
+| Other | &lt;0.1% |
 <!-- languages:end -->
 
 ## Featured work
