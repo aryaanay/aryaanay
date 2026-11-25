@@ -112,7 +112,7 @@ WEB_PACKAGES = {
     "vue": "Vue.js", "nuxt": "Nuxt", "svelte": "Svelte", "@sveltejs/kit": "SvelteKit",
     "@angular/core": "Angular", "astro": "Astro", "express": "Express",
     "vite": "Vite", "tailwindcss": "Tailwind CSS",
-    "framer-motion": "Framer", "firebase": "Firebase",
+    "framer-motion": "Framer Motion", "firebase": "Firebase",
     "prisma": "Prisma", "pg": "PostgreSQL", "mongodb": "MongoDB",
     "redis": "Redis", "three": "Three.js",
 }
@@ -200,7 +200,7 @@ def stack_display(readme):
     section = body.split("\n### Languages\n", 1)[0]
     rows = re.findall(r"^\*\*[^*\n]+\*\* · (.+)$", section, re.MULTILINE)
     names = list(dict.fromkeys(name.strip() for row in rows for name in row.split(",") if name.strip()))
-    aliases = {"c++": "cplusplus", "c#": "csharp", ".net": "dotnet", "scikit-learn": "scikitlearn"}
+    aliases = {"c++": "cplusplus", "c#": "csharp", ".net": "dotnet", "scikit-learn": "scikitlearn", "framer motion": "framer"}
     masks = []
     slides = []
     for name in names:
