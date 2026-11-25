@@ -7,7 +7,7 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
-from urllib.error import URLError
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 OWNER = "aryaanay"
@@ -100,6 +100,74 @@ text {{ fill:var(--ink); font:20px system-ui,sans-serif; }}
 }}
 </style>
 {chr(10).join(content)}
+</svg>
+'''
+
+
+def stack_display(readme):
+    header, found, body = readme.partition("\n## Tech stack\n")
+    if not found:
+        raise ValueError("Tech stack heading missing")
+    section = body.split("\n### Languages\n", 1)[0]
+    rows = re.findall(r"^\*\*[^*\n]+\*\* · (.+)$", section, re.MULTILINE)
+    names = list(dict.fromkeys(name.strip() for row in rows for name in row.split(",") if name.strip()))
+    aliases = {"c++": "cplusplus", "c#": "csharp", ".net": "dotnet"}
+    masks = []
+    slides = []
+    for name in names:
+        normalized = name.lower()
+        slug = aliases.get(normalized, re.sub(r"[^a-z0-9]", "", normalized.replace(".", "dot")))
+        if not slug:
+            continue
+        url = f"https://raw.githubusercontent.com/simple-icons/simple-icons/16.38.1/icons/{slug}.svg"
+        try:
+            with urlopen(Request(url, headers={"User-Agent": "aryaanay-profile"}), timeout=6) as icon:
+                raw = icon.read(32769).decode("utf-8")
+        except HTTPError as exc:
+            if exc.code == 404:
+                continue
+            raise
+        geometry = re.fullmatch(
+            r'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">'
+            r'<title>[^<]*</title><path d="([MmZzLlHhVvCcSsQqTtAaEe0-9.,+\-\s]+)"/></svg>',
+            raw.strip(),
+        )
+        if geometry is None:
+            raise ValueError(f"Unexpected geometry for {slug}")
+        index = len(masks)
+        masks.append(f'<mask id="logo-{index}"><path d="{geometry[1]}" fill="white" '
+                     f'transform="translate(14 7) scale(3.5)"/></mask>')
+        slides.append(f'<rect class="logo" style="--delay:{index * 3}s" width="112" height="98" '
+                      f'fill="url(#dots)" mask="url(#logo-{index})"/>')
+    if not slides:
+        raise ValueError("No logos found for the technologies listed")
+    period = len(slides) * 3
+    slot = 100 / len(slides)
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="112" height="98" viewBox="0 0 112 98">
+<title>Rotating tech stack logos</title>
+<!-- Logo silhouettes from Simple Icons 16.38.1. Trademarks belong to their respective owners. -->
+<style>
+:root {{ --copper:#a54431; }}
+@media (prefers-color-scheme:dark) {{ :root {{ --copper:#ff936c; }} }}
+.dot {{ fill:var(--copper); }}
+.logo {{ opacity:0; }}
+.logo:first-of-type {{ opacity:1; }}
+@media (prefers-reduced-motion:no-preference) {{
+  .logo {{ animation:cycle {period}s linear calc(var(--delay) - {period}s) infinite; }}
+}}
+@keyframes cycle {{
+  0% {{ opacity:0; }}
+  {slot * .10:.5f}%, {slot * .87:.5f}% {{ opacity:1; }}
+  {slot:.5f}%, 100% {{ opacity:0; }}
+}}
+</style>
+<defs>
+  <pattern id="dots" width="3.3" height="3.3" patternUnits="userSpaceOnUse">
+    <circle class="dot" cx="1.65" cy="1.65" r="1.2"/>
+  </pattern>
+  {chr(10).join(masks)}
+</defs>
+{chr(10).join(slides)}
 </svg>
 '''
 
@@ -198,6 +266,13 @@ if __name__ == "__main__":
         else:
             new = refresh(new, languages, LANGUAGES_START, LANGUAGES_END)
             Path("language-matrix.svg").write_text(matrix, encoding="utf-8", newline="\n")
+
+    try:
+        stack = stack_display(new)
+    except (URLError, ValueError):
+        print("::warning::Tech stack logos unavailable. Keeping the previous display.")
+    else:
+        Path("tech-stack-matrix.svg").write_text(stack, encoding="utf-8", newline="\n")
 
     if new != old:
         path.write_text(new, encoding="utf-8", newline="\n")
