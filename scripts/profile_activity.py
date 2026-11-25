@@ -3,102 +3,60 @@
 import json
 import os
 import re
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
 from urllib.error import URLError
-from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 OWNER = "aryaanay"
 PROFILE = f"{OWNER}/{OWNER}"
 START = "<!-- activity:start -->"
 END = "<!-- activity:end -->"
-RELEASES_START = "<!-- releases:start -->"
-RELEASES_END = "<!-- releases:end -->"
+LANGUAGES_START = "<!-- languages:start -->"
+LANGUAGES_END = "<!-- languages:end -->"
 REPO = re.compile(r"[A-Za-z0-9-]+/[A-Za-z0-9_.-]+")
 DISCUSSION = re.compile(r"https://github\.com/[A-Za-z0-9-]+/[A-Za-z0-9_.-]+/discussions/[1-9][0-9]*")
 
 
-# Only public metadata from these featured repositories enters the timeline.
-FEATURED = {
-    "build-review-release": "Codex skill",
-    "Quantitative-Finance-Model-Development-Portfolio": "Quant notebooks",
-    "ai-narrative-reality-gap": "AI research",
-    "commhub": "CommUHub",
-}
+# Count only the featured repositories that are public at refresh time.
+FEATURED = (
+    "build-review-release",
+    "Quantitative-Finance-Model-Development-Portfolio",
+    "ai-narrative-reality-gap",
+    "commhub",
+)
 
 
-def month_index(date):
-    return date.year * 12 + date.month - 1
+def render_languages(repos):
+    public = {repo["full_name"].lower() for repo in repos if repo.get("private") is False}
+    counts = Counter()
+    for slug in FEATURED:
+        name = f"{OWNER}/{slug}"
+        if name.lower() not in public:
+            continue
+        languages = request(f"repos/{name}/languages")
+        if not isinstance(languages, dict) or any(
+            type(amount) is not int or amount < 0 for amount in languages.values()
+        ):
+            raise ValueError("Unexpected language data")
+        counts.update({name: amount for name, amount in languages.items() if amount})
 
+    total = counts.total()
+    if not total:
+        return "GitHub has no language data for the featured repositories."
+    ranked = sorted(counts.items(), key=lambda row: (-row[1], row[0].lower()))
+    rows = ranked[:5]
+    if len(ranked) > 5:
+        rows.append(("Other", sum(amount for _, amount in ranked[5:])))
 
-def timestamp(value):
-    return datetime.fromisoformat(value.replace("Z", "+00:00"))
-
-
-def render_timeline(repos, now):
-    public = {repo["full_name"].lower(): repo for repo in repos if repo.get("private") is False}
-    months = [month_index(now) - 11 + column for column in range(12)]
-    labels = []
-    marks = []
-    notes = []
-    for column, month in enumerate(months):
-        x = 191 + 31 * column
-        year, index = divmod(month, 12)
-        date = datetime(year, index + 1, 1)
-        if column in (0, 3, 6, 9, 11):
-            labels.append(f'<text x="{x}" y="22" text-anchor="middle">{date:%b}</text>')
-    for row, (slug, label) in enumerate(FEATURED.items()):
-        y = 50 + 32 * row
-        labels.append(f'<text x="7" y="{y + 5}">{label}</text>')
-        full_name = f"{OWNER}/{slug}"
-        repo = public.get(full_name.lower())
-        created = month_index(timestamp(repo["created_at"])) if repo else None
-        results = request(f"repos/{full_name}/releases?per_page=100") if repo else []
-        releases = [
-            release for release in results
-            if not release["draft"] and not release["prerelease"]
-            and release.get("published_at") and release.get("tag_name")
-        ]
-        release_months = {month_index(timestamp(release["published_at"])) for release in releases}
-        if releases:
-            latest = max(releases, key=lambda release: timestamp(release["published_at"]))
-            tag = latest["tag_name"]
-            url = f"https://github.com/{full_name}/releases/tag/{quote(tag, safe='')}"
-            lines = (latest.get("body") or "").splitlines()
-            excerpt = next((line.strip(" -*") for line in lines if line.strip(" -*")
-                            and not line.lstrip().startswith(("#", "<"))), "")
-            excerpt = excerpt[:157].rstrip() + "…" if len(excerpt) > 160 else excerpt
-            summary = f" — {escape(excerpt)}" if excerpt else ""
-            notes.append(f'<li>{escape(label)} <a href="{url}">{escape(tag)}</a>{summary}</li>')
-        for column, month in enumerate(months):
-            x = 191 + 31 * column
-            if month in release_months:
-                marks.append(f'<path class="release" d="M{x} {y-6}l6 6-6 6-6-6z"/>')
-            elif month == created:
-                marks.append(f'<circle class="opened" cx="{x}" cy="{y}" r="5"/>')
-            else:
-                marks.append(f'<circle class="quiet" cx="{x}" cy="{y}" r="2"/>')
-
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 164" width="552" height="164" role="img">
-<title>Public repository milestones</title>
-<style>
-/* The copper accent matches the profile's Lorenz attractor. */
-:root {{ --ink:#3b4b59; --quiet:#9eaab4; --copper:#a54431; }}
-@media (prefers-color-scheme: dark) {{
-  :root {{ --ink:#d1dbe5; --quiet:#758696; --copper:#ff936c; }}
-}}
-text {{ fill:var(--ink); font:20px system-ui,sans-serif; }}
-.quiet {{ fill:var(--quiet); }}
-.opened {{ fill:var(--copper); }}
-.release {{ fill:var(--copper); }}
-</style>
-{chr(10).join(labels)}
-{chr(10).join(marks)}
-</svg>
-'''
-    return svg, "<ul>\n" + "\n".join(notes) + "\n</ul>" if notes else ""
+    table = ["| Language | Share |", "| :--- | ---: |"]
+    for name, amount in rows:
+        label = escape(" ".join(name.split())).replace("|", "&#124;").replace("[", "&#91;")
+        share = f"{amount / total:.1%}" if amount / total >= 0.001 else "&lt;0.1%"
+        table.append(f"| {label} | {share} |")
+    return "\n".join(table)
 
 
 def request(path, query=None):
@@ -183,22 +141,17 @@ if __name__ == "__main__":
     except (URLError, KeyError, ValueError):
         print("::warning::Public discussion search unavailable. Updating repository activity only.")
 
-    if isinstance(posts, list):
-        path = Path("README.md")
-        old = path.read_text(encoding="utf-8")
-        new = refresh(old, render(repos, events, posts, datetime.now(timezone.utc)))
-        if new != old:
-            path.write_text(new, encoding="utf-8", newline="\n")
+    path = Path("README.md")
+    old = path.read_text(encoding="utf-8")
+    new = refresh(old, render(repos, events, posts, datetime.now(timezone.utc)))
 
-    try:
-        timeline, notes = render_timeline(repos, datetime.now(timezone.utc))
-    except (URLError, KeyError, ValueError):
-        print("::warning::Public release data unavailable. Keeping the last timeline.")
-    else:
-        Path("project-timeline.svg").write_text(timeline, encoding="utf-8", newline="\n")
-        readme = Path("README.md")
-        current = readme.read_text(encoding="utf-8")
-        if RELEASES_START in current or RELEASES_END in current:
-            updated = refresh(current, notes, RELEASES_START, RELEASES_END)
-            if updated != current:
-                readme.write_text(updated, encoding="utf-8", newline="\n")
+    if LANGUAGES_START in new or LANGUAGES_END in new:
+        try:
+            languages = render_languages(repos)
+        except (URLError, ValueError):
+            print("::warning::Public language data unavailable. Keeping the previous breakdown.")
+        else:
+            new = refresh(new, languages, LANGUAGES_START, LANGUAGES_END)
+
+    if new != old:
+        path.write_text(new, encoding="utf-8", newline="\n")
