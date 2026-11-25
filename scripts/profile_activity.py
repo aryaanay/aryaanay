@@ -26,7 +26,7 @@ DISCUSSION = re.compile(r"https://github\.com/[A-Za-z0-9-]+/[A-Za-z0-9_.-]+/disc
 def owned_public_repos(repos):
     return [
         repo for repo in repos
-        if repo.get("private") is False and repo.get("fork") is False
+        if repo.get("private") is False
         and REPO.fullmatch(repo["full_name"])
         and repo["full_name"].lower().startswith(f"{OWNER}/")
         and repo["full_name"].lower() != PROFILE
