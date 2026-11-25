@@ -335,6 +335,20 @@ def refresh(readme, content, start=START, end=END):
     return f"{before}{start}\n{content}\n{end}{after}"
 
 
+def refresh_tools(readme, tools):
+    start_heading = "\n## Tech stack\n"
+    end_heading = "\n### Languages\n"
+    before, found_header, body = readme.partition(start_heading)
+    if not found_header:
+        raise ValueError("Tech stack heading missing")
+    section, found_languages, after = body.partition(end_heading)
+    if not found_languages or re.search(r"^#{1,3} ", section, re.MULTILINE):
+        raise ValueError("Tech stack section is incomplete")
+    start, end = "<!-- tools:start -->", "<!-- tools:end -->"
+    updated = refresh(section, tools, start, end)
+    return before + found_header + updated + found_languages + after
+
+
 if __name__ == "__main__":
     repos = list_public_repos()
     events = request(f"users/{OWNER}/events/public?per_page=100")
@@ -366,12 +380,7 @@ if __name__ == "__main__":
 
     try:
         tools = detected_stack(repos)
-        candidate, count = re.subn(
-            r"(<summary>Tools by category</summary>\n\n)[\s\S]*?(\n\n</details>)",
-            lambda match: match[1] + tools + match[2], new, count=1,
-        )
-        if not count:
-            raise ValueError("Tools dropdown missing")
+        candidate = refresh_tools(new, tools)
         stack = stack_display(candidate)
     except (URLError, ValueError, KeyError, TypeError):
         print("::warning::Tech stack logos unavailable. Keeping the previous display.")
