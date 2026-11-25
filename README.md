@@ -20,9 +20,18 @@ I’m interested in how people make decisions under uncertainty, especially in f
 
 ## Tech stack
 
+<picture>
+  <img src="tech-stack-matrix.svg" alt="Copper dot-matrix logos cycling through the tools listed below.">
+</picture>
+
+<details>
+<summary>Tools by category</summary>
+
 **Research** · Python, Jupyter  
 **Web** · TypeScript, React, Next.js, Supabase  
 **Automation** · GitHub Actions
+
+</details>
 
 ### Languages
 
