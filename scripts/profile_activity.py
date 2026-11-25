@@ -3,11 +3,14 @@
 import json
 import os
 import re
+import tomllib
+from base64 import b64decode
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
 from urllib.error import HTTPError, URLError
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 OWNER = "aryaanay"
@@ -104,6 +107,92 @@ text {{ fill:var(--ink); font:20px system-ui,sans-serif; }}
 '''
 
 
+WEB_PACKAGES = {
+    "react": "React", "react-dom": "React", "next": "Next.js",
+    "vue": "Vue.js", "nuxt": "Nuxt", "svelte": "Svelte", "@sveltejs/kit": "SvelteKit",
+    "@angular/core": "Angular", "astro": "Astro", "express": "Express",
+    "vite": "Vite", "tailwindcss": "Tailwind CSS",
+    "framer-motion": "Framer", "firebase": "Firebase",
+    "prisma": "Prisma", "pg": "PostgreSQL", "mongodb": "MongoDB",
+    "redis": "Redis", "three": "Three.js",
+}
+PY_PACKAGES = {
+    "numpy": "NumPy", "pandas": "pandas", "scipy": "SciPy", "torch": "PyTorch",
+    "tensorflow": "TensorFlow", "scikit-learn": "scikit-learn", "polars": "Polars",
+    "fastapi": "FastAPI", "flask": "Flask", "django": "Django", "streamlit": "Streamlit",
+}
+
+
+def manifest_packages(repo, entry):
+    data = request(f"repos/{repo}/git/blobs/{entry['sha']}")
+    if data["encoding"] != "base64" or data["size"] > 131072:
+        raise ValueError("Unexpected manifest encoding or size")
+    raw = b64decode(data["content"]).decode("utf-8-sig")
+    path = entry["path"]
+    if path.endswith("package.json"):
+        package = json.loads(raw)
+        return WEB_PACKAGES, {
+            name for group in ("dependencies", "devDependencies", "peerDependencies")
+            for name in package.get(group, {})
+        }
+    if path.endswith("pyproject.toml"):
+        config = tomllib.loads(raw)
+        dependencies = config.get("project", {}).get("dependencies", [])
+        dependencies += list(config.get("tool", {}).get("poetry", {}).get("dependencies", {}))
+    else:
+        dependencies = raw.splitlines()
+    return PY_PACKAGES, {
+        match[0].lower().replace("_", "-") for line in dependencies
+        if (match := re.match(r"^[A-Za-z0-9][A-Za-z0-9._-]*", line.strip()))
+    }
+
+
+def detected_stack(repos):
+    available = {
+        repo["full_name"].lower(): repo["default_branch"]
+        for repo in repos if repo.get("private") is False
+    }
+    names = {"Research": set(), "Web": set(), "Automation": {"GitHub Actions"}}
+    for slug in FEATURED:
+        repo = f"{OWNER}/{slug}"
+        branch = available.get(repo.lower())
+        if branch is None:
+            continue
+        tree = request(f"repos/{repo}/git/trees/{quote(branch, safe='')}?recursive=1")
+        if tree.get("truncated"):
+            raise ValueError(f"Incomplete file tree for {repo}")
+        for entry in tree["tree"]:
+            path = entry["path"]
+            parents = path.split("/")[:-1]
+            if entry["type"] != "blob" or any(
+                parent.startswith(".") or parent in {"node_modules", "vendor", "dist", "build"}
+                for parent in parents
+            ):
+                continue
+            if path.endswith(".py"):
+                names["Research"].add("Python")
+            if path.endswith(".ipynb"):
+                names["Research"].add("Jupyter")
+            if path.endswith((".ts", ".tsx")):
+                names["Web"].add("TypeScript")
+            filename = path.rsplit("/", 1)[-1]
+            if filename == "Dockerfile" or filename in {"compose.yml", "compose.yaml", "docker-compose.yml", "docker-compose.yaml"}:
+                names["Automation"].add("Docker")
+            if filename == "deno.json" or filename == "deno.jsonc":
+                names["Web"].add("Deno")
+            if len(parents) > 3 or filename not in {"package.json", "pyproject.toml", "requirements.txt"}:
+                continue
+            mapping, packages = manifest_packages(repo, entry)
+            if any(name.startswith("@supabase/") for name in packages):
+                names["Web"].add("Supabase")
+            group = "Web" if filename == "package.json" else "Research"
+            names[group].update(mapping[name] for name in packages if name in mapping)
+    return "\n".join(
+        f"**{group}** · {', '.join(sorted(tools, key=str.casefold))}  "
+        for group, tools in names.items() if tools
+    ).rstrip()
+
+
 def stack_display(readme):
     header, found, body = readme.partition("\n## Tech stack\n")
     if not found:
@@ -111,7 +200,7 @@ def stack_display(readme):
     section = body.split("\n### Languages\n", 1)[0]
     rows = re.findall(r"^\*\*[^*\n]+\*\* · (.+)$", section, re.MULTILINE)
     names = list(dict.fromkeys(name.strip() for row in rows for name in row.split(",") if name.strip()))
-    aliases = {"c++": "cplusplus", "c#": "csharp", ".net": "dotnet"}
+    aliases = {"c++": "cplusplus", "c#": "csharp", ".net": "dotnet", "scikit-learn": "scikitlearn"}
     masks = []
     slides = []
     for name in names:
@@ -268,11 +357,19 @@ if __name__ == "__main__":
             Path("language-matrix.svg").write_text(matrix, encoding="utf-8", newline="\n")
 
     try:
-        stack = stack_display(new)
-    except (URLError, ValueError):
+        tools = detected_stack(repos)
+        candidate, count = re.subn(
+            r"(<summary>Tools by category</summary>\n\n)[\s\S]*?(\n\n</details>)",
+            lambda match: match[1] + tools + match[2], new, count=1,
+        )
+        if not count:
+            raise ValueError("Tools dropdown missing")
+        stack = stack_display(candidate)
+    except (URLError, ValueError, KeyError, TypeError):
         print("::warning::Tech stack logos unavailable. Keeping the previous display.")
     else:
         Path("tech-stack-matrix.svg").write_text(stack, encoding="utf-8", newline="\n")
+        new = candidate
 
     if new != old:
         path.write_text(new, encoding="utf-8", newline="\n")
