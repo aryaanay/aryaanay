@@ -32,21 +32,6 @@ Share of language bytes across all repositories.
   <img src="language-matrix.svg" alt="Dot-matrix bars comparing language shares. Exact percentages follow.">
 </picture>
 
-<!-- <details>
-<summary>Exact percentages</summary>
-
-<!-- languages:start -->
-| Language | Share |
-| :--- | ---: |
-| TypeScript | 49.0% |
-| Jupyter Notebook | 47.4% |
-| JavaScript | 1.6% |
-| CSS | 1.5% |
-| PLpgSQL | 0.5% |
-| Other | &lt;0.1% |
-<!-- languages:end -->
-
-</details> -->
 
 ## Featured work
 
