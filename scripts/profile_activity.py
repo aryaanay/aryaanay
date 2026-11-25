@@ -4,14 +4,18 @@ import json
 import os
 import re
 from datetime import datetime, timedelta, timezone
+from html import escape
 from pathlib import Path
 from urllib.error import URLError
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 OWNER = "aryaanay"
 PROFILE = f"{OWNER}/{OWNER}"
 START = "<!-- activity:start -->"
 END = "<!-- activity:end -->"
+RELEASES_START = "<!-- releases:start -->"
+RELEASES_END = "<!-- releases:end -->"
 REPO = re.compile(r"[A-Za-z0-9-]+/[A-Za-z0-9_.-]+")
 DISCUSSION = re.compile(r"https://github\.com/[A-Za-z0-9-]+/[A-Za-z0-9_.-]+/discussions/[1-9][0-9]*")
 
@@ -38,6 +42,7 @@ def render_timeline(repos, now):
     months = [month_index(now) - 11 + column for column in range(12)]
     labels = []
     marks = []
+    notes = []
     for column, month in enumerate(months):
         x = 191 + 31 * column
         year, index = divmod(month, 12)
@@ -50,12 +55,23 @@ def render_timeline(repos, now):
         full_name = f"{OWNER}/{slug}"
         repo = public.get(full_name.lower())
         created = month_index(timestamp(repo["created_at"])) if repo else None
-        releases = request(f"repos/{full_name}/releases?per_page=100") if repo else []
-        release_months = {
-            month_index(timestamp(release["published_at"]))
-            for release in releases
-            if not release["draft"] and not release["prerelease"] and release.get("published_at")
-        }
+        results = request(f"repos/{full_name}/releases?per_page=100") if repo else []
+        releases = [
+            release for release in results
+            if not release["draft"] and not release["prerelease"]
+            and release.get("published_at") and release.get("tag_name")
+        ]
+        release_months = {month_index(timestamp(release["published_at"])) for release in releases}
+        if releases:
+            latest = max(releases, key=lambda release: timestamp(release["published_at"]))
+            tag = latest["tag_name"]
+            url = f"https://github.com/{full_name}/releases/tag/{quote(tag, safe='')}"
+            lines = (latest.get("body") or "").splitlines()
+            excerpt = next((line.strip(" -*") for line in lines if line.strip(" -*")
+                            and not line.lstrip().startswith(("#", "<"))), "")
+            excerpt = excerpt[:157].rstrip() + "…" if len(excerpt) > 160 else excerpt
+            summary = f" — {escape(excerpt)}" if excerpt else ""
+            notes.append(f'<li>{escape(label)} <a href="{url}">{escape(tag)}</a>{summary}</li>')
         for column, month in enumerate(months):
             x = 191 + 31 * column
             if month in release_months:
@@ -65,7 +81,7 @@ def render_timeline(repos, now):
             else:
                 marks.append(f'<circle class="quiet" cx="{x}" cy="{y}" r="2"/>')
 
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 164" width="552" height="164" role="img">
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 164" width="552" height="164" role="img">
 <title>Public repository milestones</title>
 <style>
 /* The copper accent matches the profile's Lorenz attractor. */
@@ -73,7 +89,7 @@ def render_timeline(repos, now):
 @media (prefers-color-scheme: dark) {{
   :root {{ --ink:#d1dbe5; --quiet:#758696; --copper:#ff936c; }}
 }}
-text {{ fill:var(--ink); font:17px system-ui,sans-serif; }}
+text {{ fill:var(--ink); font:20px system-ui,sans-serif; }}
 .quiet {{ fill:var(--quiet); }}
 .opened {{ fill:var(--copper); }}
 .release {{ fill:var(--copper); }}
@@ -82,6 +98,7 @@ text {{ fill:var(--ink); font:17px system-ui,sans-serif; }}
 {chr(10).join(marks)}
 </svg>
 '''
+    return svg, "<ul>\n" + "\n".join(notes) + "\n</ul>" if notes else ""
 
 
 def request(path, query=None):
@@ -142,12 +159,12 @@ def render(repos, events, discussions, now):
     return "\n".join(links.values()) or "No public activity in the past 90 days."
 
 
-def refresh(readme, activity):
-    if readme.count(START) != 1 or readme.count(END) != 1 or readme.index(START) > readme.index(END):
-        raise ValueError("Expected exactly one ordered pair of activity markers")
-    before, _, tail = readme.partition(START)
-    _, _, after = tail.partition(END)
-    return f"{before}{START}\n{activity}\n{END}{after}"
+def refresh(readme, content, start=START, end=END):
+    if readme.count(start) != 1 or readme.count(end) != 1 or readme.index(start) > readme.index(end):
+        raise ValueError("Expected exactly one ordered pair of profile markers")
+    before, _, tail = readme.partition(start)
+    _, _, after = tail.partition(end)
+    return f"{before}{start}\n{content}\n{end}{after}"
 
 
 if __name__ == "__main__":
@@ -174,8 +191,14 @@ if __name__ == "__main__":
             path.write_text(new, encoding="utf-8", newline="\n")
 
     try:
-        timeline = render_timeline(repos, datetime.now(timezone.utc))
+        timeline, notes = render_timeline(repos, datetime.now(timezone.utc))
     except (URLError, KeyError, ValueError):
         print("::warning::Public release data unavailable. Keeping the last timeline.")
     else:
         Path("project-timeline.svg").write_text(timeline, encoding="utf-8", newline="\n")
+        readme = Path("README.md")
+        current = readme.read_text(encoding="utf-8")
+        if RELEASES_START in current or RELEASES_END in current:
+            updated = refresh(current, notes, RELEASES_START, RELEASES_END)
+            if updated != current:
+                readme.write_text(updated, encoding="utf-8", newline="\n")
