@@ -31,34 +31,6 @@ I’m interested in how people make decisions under uncertainty, especially in f
 **Web** · Framer Motion, Next.js, React, Supabase, Tailwind CSS, TypeScript  
 **Automation** · GitHub Actions
 
-<!-- </details> -->
-
-### Languages
-
-Share of language bytes across my public project repositories.
-
-<picture>
-  <img src="language-matrix.svg" alt="Dot-matrix bars comparing language shares. Exact percentages follow.">
-</picture>
-
-
-## Featured work
-
-### Order book simulator
-
-My limit order book notebook models bids, asks, and trades in a synthetic market. It then puts an inventory-aware market maker into that market and tests a case the initial version missed: fills that happen between strategy steps.
-
-<picture>
-  <img src="order-book-simulation.svg" alt="Simulated order book showing the best bid, best ask, and executed trades over time.">
-</picture>
-
-[Open the order book notebook](https://github.com/aryaanay/Quantitative-Finance-Model-Development-Portfolio/blob/main/OrderBookSimulator_InventoryAwareMarketMaking.ipynb)
-
-<details>
-<summary>What broke in the first version?</summary>
-
-The simulator only checked for fills right after it posted a quote. A fill between strategy steps could leave its inventory count wrong. The fix tracks the order IDs the strategy has placed and checks every new trade for a match. The notebook verifies this by filling a quote between steps and checking that the next step picks it up.
-
 </details>
 
 <details>
