@@ -17,9 +17,17 @@ I’m interested in how people make decisions under uncertainty, especially in f
 
 **[Build, Review, and Release](https://github.com/aryaanay/build-review-release#readme)** is a reusable Codex skill for planning a project, testing it, and checking that it’s ready to publish. It uses the tools already in your workspace. The repository includes setup instructions for using it across projects or sharing it with a team.
 
+### Public project timeline
+
+<picture>
+  <img src="project-timeline.svg" alt="A twelve-month timeline for Build, Review, and Release, the quant notebooks, AI Narrative Reality Gap, and CommUHub. Circles mark repository creation and diamonds mark versioned releases.">
+</picture>
+
+A copper circle marks the month a repository was created. A diamond marks a published GitHub release.
+
 ## Featured work
 
-### Can a market maker manage inventory while quoting both sides?
+### Order book simulator
 
 My limit order book notebook models bids, asks, and trades in a synthetic market. It then puts an inventory-aware market maker into that market and tests a case the initial version missed: fills that happen between strategy steps.
 
@@ -46,7 +54,7 @@ The simulator only checked for fills right after it posted a quote. A fill betwe
 
 </details>
 
-### What do corporate AI claims tell us about future returns?
+### AI Narrative Reality Gap
 
 [AI Narrative Reality Gap](https://github.com/aryaanay/ai-narrative-reality-gap#readme) lays out a study of S&P 100 companies. The plan compares a score based on evidence behind AI claims with a baseline that counts AI keywords. Data collection is next.
 
@@ -63,7 +71,9 @@ flowchart LR
 
 ### CommUHub
 
-[CommUHub](https://github.com/aryaanay/commhub) is a Next.js project built to make local resources and events easier to find in one place. 4th Place - Technology Student Association (TSA) National Conference 2026
+[CommUHub](https://github.com/aryaanay/commhub) is a Next.js project built to make local resources and events easier to find in one place.
+
+**4th place**, Technology Student Association National Conference, 2026.
 
 ## Recent public activity
 
