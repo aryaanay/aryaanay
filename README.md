@@ -24,14 +24,14 @@ I’m interested in how people make decisions under uncertainty, especially in f
   <img src="tech-stack-matrix.svg" alt="Copper dot-matrix logos cycling through the tools listed below.">
 </picture>
 
-<details>
+<!-- <details> -->
 <summary>Tools by category</summary>
 
 **Research** · Jupyter, NumPy, pandas, Python, scikit-learn, SciPy, Streamlit  
 **Web** · Framer Motion, Next.js, React, Supabase, Tailwind CSS, TypeScript  
 **Automation** · GitHub Actions
 
-</details>
+<!-- </details> -->
 
 ### Languages
 
