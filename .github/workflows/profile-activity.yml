@@ -32,11 +32,10 @@ jobs:
       - name: Publish changes
         run: |
           git add README.md quant-experiments.svg order-book-simulation.svg
-          if [ -f project-timeline.svg ]; then git add project-timeline.svg; fi
           if git diff --cached --quiet; then
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Refresh profile activity, timeline, and notebook graphs'
+          git commit -m 'Refresh profile activity, languages, and notebook graphs'
           git push origin HEAD:main
