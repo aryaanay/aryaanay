@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 164" width="552" height="164" role="img">
+<title>Public repository milestones</title>
+<style>
+/* The copper accent matches the profile's Lorenz attractor. */
+:root { --ink:#3b4b59; --quiet:#9eaab4; --copper:#a54431; }
+@media (prefers-color-scheme: dark) {
+  :root { --ink:#d1dbe5; --quiet:#758696; --copper:#ff936c; }
+}
+text { fill:var(--ink); font:17px system-ui,sans-serif; }
+.quiet { fill:var(--quiet); }
+.opened { fill:var(--copper); }
+.release { fill:var(--copper); }
+</style>
+<text x="191" y="22" text-anchor="middle">Dec</text>
+<text x="284" y="22" text-anchor="middle">Mar</text>
+<text x="377" y="22" text-anchor="middle">Jun</text>
+<text x="470" y="22" text-anchor="middle">Sep</text>
+<text x="532" y="22" text-anchor="middle">Nov</text>
+<text x="7" y="55">Codex skill</text>
+<text x="7" y="87">Quant notebooks</text>
+<text x="7" y="119">AI research</text>
+<text x="7" y="151">CommUHub</text>
+<circle class="quiet" cx="191" cy="50" r="2"/>
+<circle class="quiet" cx="222" cy="50" r="2"/>
+<circle class="quiet" cx="253" cy="50" r="2"/>
+<circle class="quiet" cx="284" cy="50" r="2"/>
+<circle class="quiet" cx="315" cy="50" r="2"/>
+<circle class="quiet" cx="346" cy="50" r="2"/>
+<circle class="quiet" cx="377" cy="50" r="2"/>
+<circle class="quiet" cx="408" cy="50" r="2"/>
+<circle class="quiet" cx="439" cy="50" r="2"/>
+<circle class="quiet" cx="470" cy="50" r="2"/>
+<circle class="quiet" cx="501" cy="50" r="2"/>
+<circle class="opened" cx="532" cy="50" r="5"/>
+<circle class="quiet" cx="191" cy="82" r="2"/>
+<circle class="quiet" cx="222" cy="82" r="2"/>
+<circle class="quiet" cx="253" cy="82" r="2"/>
+<circle class="quiet" cx="284" cy="82" r="2"/>
+<circle class="quiet" cx="315" cy="82" r="2"/>
+<circle class="quiet" cx="346" cy="82" r="2"/>
+<circle class="quiet" cx="377" cy="82" r="2"/>
+<circle class="quiet" cx="408" cy="82" r="2"/>
+<circle class="opened" cx="439" cy="82" r="5"/>
+<circle class="quiet" cx="470" cy="82" r="2"/>
+<circle class="quiet" cx="501" cy="82" r="2"/>
+<circle class="quiet" cx="532" cy="82" r="2"/>
+<circle class="quiet" cx="191" cy="114" r="2"/>
+<circle class="quiet" cx="222" cy="114" r="2"/>
+<circle class="quiet" cx="253" cy="114" r="2"/>
+<circle class="quiet" cx="284" cy="114" r="2"/>
+<circle class="quiet" cx="315" cy="114" r="2"/>
+<circle class="quiet" cx="346" cy="114" r="2"/>
+<circle class="quiet" cx="377" cy="114" r="2"/>
+<circle class="quiet" cx="408" cy="114" r="2"/>
+<circle class="quiet" cx="439" cy="114" r="2"/>
+<circle class="quiet" cx="470" cy="114" r="2"/>
+<circle class="quiet" cx="501" cy="114" r="2"/>
+<circle class="opened" cx="532" cy="114" r="5"/>
+<circle class="quiet" cx="191" cy="146" r="2"/>
+<circle class="quiet" cx="222" cy="146" r="2"/>
+<circle class="quiet" cx="253" cy="146" r="2"/>
+<circle class="quiet" cx="284" cy="146" r="2"/>
+<circle class="opened" cx="315" cy="146" r="5"/>
+<circle class="quiet" cx="346" cy="146" r="2"/>
+<circle class="quiet" cx="377" cy="146" r="2"/>
+<circle class="quiet" cx="408" cy="146" r="2"/>
+<circle class="quiet" cx="439" cy="146" r="2"/>
+<circle class="quiet" cx="470" cy="146" r="2"/>
+<circle class="quiet" cx="501" cy="146" r="2"/>
+<circle class="quiet" cx="532" cy="146" r="2"/>
+</svg>
