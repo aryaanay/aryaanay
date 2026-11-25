@@ -45,7 +45,7 @@ def render_languages(repos):
 
     total = counts.total()
     if not total:
-        return "GitHub has no language data for the featured repositories."
+        return "GitHub has no language data for the featured repositories.", language_matrix([], 0)
     ranked = sorted(counts.items(), key=lambda row: (-row[1], row[0].lower()))
     rows = ranked[:5]
     if len(ranked) > 5:
@@ -56,7 +56,52 @@ def render_languages(repos):
         label = escape(" ".join(name.split())).replace("|", "&#124;").replace("[", "&#91;")
         share = f"{amount / total:.1%}" if amount / total >= 0.001 else "&lt;0.1%"
         table.append(f"| {label} | {share} |")
-    return "\n".join(table)
+    return "\n".join(table), language_matrix(rows, total)
+
+
+def language_matrix(rows, total):
+    """Draw the same shares as the text table, quantized to twenty dots."""
+    content = []
+    for row, (name, amount) in enumerate(rows):
+        y = 20 + row * 30
+        label = escape("Jupyter" if name == "Jupyter Notebook" else " ".join(name.split()))
+        share = f"{amount / total:.1%}" if amount / total >= 0.001 else "&lt;0.1%"
+        content.append(f'<text x="6" y="{y + 6}">{label}</text>')
+        content.append(f'<text x="492" y="{y + 6}" text-anchor="end">{share}</text>')
+        for column in range(20):
+            x = 164 + 12 * column
+            dot = f'cx="{x}" cy="{y}" r="3.4"'
+            content.append(f'<circle class="track" {dot}/>')
+            portion = min(1, max(0, 20 * amount / total - column))
+            if portion:
+                content.append(f'<circle class="lit" {dot} opacity="{max(0.30, portion):.2f}"/>')
+                if portion >= 0.5:
+                    content.append(f'<circle class="sweep" {dot} style="animation-delay:{column * 0.07:.2f}s"/>')
+    if not content:
+        content.append('<text x="6" y="26">No detected language data</text>')
+    height = max(38, len(rows) * 30 + 8)
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="500" height="{height}" viewBox="0 0 500 {height}">
+<title>Language shares for featured public repositories</title>
+<style>
+:root {{ --ink:#364451; --track:#abb6c0; --lit:#a54431; --sweep:#d96b46; }}
+@media (prefers-color-scheme: dark) {{
+  :root {{ --ink:#d1dbe5; --track:#485665; --lit:#e78766; --sweep:#ffd3a9; }}
+}}
+text {{ fill:var(--ink); font:20px system-ui,sans-serif; }}
+.track {{ fill:var(--track); }}
+.lit {{ fill:var(--lit); }}
+.sweep {{ fill:var(--sweep); opacity:0; }}
+@media (prefers-reduced-motion:no-preference) {{
+  .sweep {{ animation:scan 7s ease-in-out infinite; }}
+}}
+@keyframes scan {{
+  0%, 12%, 100% {{ opacity:0; }}
+  5% {{ opacity:1; }}
+}}
+</style>
+{chr(10).join(content)}
+</svg>
+'''
 
 
 def request(path, query=None):
@@ -147,11 +192,12 @@ if __name__ == "__main__":
 
     if LANGUAGES_START in new or LANGUAGES_END in new:
         try:
-            languages = render_languages(repos)
+            languages, matrix = render_languages(repos)
         except (URLError, ValueError):
             print("::warning::Public language data unavailable. Keeping the previous breakdown.")
         else:
             new = refresh(new, languages, LANGUAGES_START, LANGUAGES_END)
+            Path("language-matrix.svg").write_text(matrix, encoding="utf-8", newline="\n")
 
     if new != old:
         path.write_text(new, encoding="utf-8", newline="\n")
