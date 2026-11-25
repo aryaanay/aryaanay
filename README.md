@@ -25,6 +25,10 @@ I’m interested in how people make decisions under uncertainty, especially in f
 
 A copper circle marks the month a repository was created. A diamond marks a published GitHub release.
 
+<!-- releases:start -->
+
+<!-- releases:end -->
+
 ## Featured work
 
 ### Order book simulator
