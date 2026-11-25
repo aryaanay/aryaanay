@@ -1,7 +1,8 @@
 <p align="center">
   <picture>
     <img src="https://github.com/aryaanay/aryaanay/raw/refs/heads/main/lorenz-attractor.svg" width="286" height="158" alt="Dotted Lorenz attractor with a moving highlight.">
-  </picture>
+  </picture><br>
+  <sub>Lorenz attractor</sub>
 </p>
 
 <h1 align="center">Anay Arya</h1>
@@ -11,23 +12,25 @@
 
 I’m interested in how people make decisions under uncertainty, especially in finance and technology. I like thinking about what data can tell us and where judgment still matters.
 
-[Published skills](#published-skills) | [Featured work](#featured-work) | [Recent activity](#recent-public-activity) | [LinkedIn](https://www.linkedin.com/in/anay-arya/)
+[Tech stack](#tech-stack) | [Published skills](#published-skills) | [Featured work](#featured-work) | [Recent activity](#recent-public-activity) | [LinkedIn](https://www.linkedin.com/in/anay-arya/)
 
 ## Published skills
 
 **[Build, Review, and Release](https://github.com/aryaanay/build-review-release#readme)** is a reusable Codex skill for planning a project, testing it, and checking that it’s ready to publish. It uses the tools already in your workspace. The repository includes setup instructions for using it across projects or sharing it with a team.
 
-### Public project timeline
+## Tech stack
 
-<picture>
-  <img src="project-timeline.svg" alt="A twelve-month timeline for Build, Review, and Release, the quant notebooks, AI Narrative Reality Gap, and CommUHub. Circles mark repository creation and diamonds mark versioned releases.">
-</picture>
+**Research** · Python, Jupyter  
+**Web** · TypeScript, React, Next.js, Supabase  
+**Automation** · GitHub Actions
 
-A copper circle marks the month a repository was created. A diamond marks a published GitHub release.
+### Languages
 
-<!-- releases:start -->
+Share of language bytes detected by GitHub across the four featured public repositories.
 
-<!-- releases:end -->
+<!-- languages:start -->
+Language breakdown updates with the profile refresh.
+<!-- languages:end -->
 
 ## Featured work
 
