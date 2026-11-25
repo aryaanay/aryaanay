@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="500" height="188" viewBox="0 0 500 188">
-<title>Language shares for featured public repositories</title>
+<title>Language shares for public project repositories</title>
 <style>
 :root { --ink:#364451; --track:#abb6c0; --lit:#a54431; --sweep:#d96b46; }
 @media (prefers-color-scheme: dark) {
@@ -60,7 +60,7 @@ text { fill:var(--ink); font:20px system-ui,sans-serif; }
 <circle class="track" cx="380" cy="20" r="3.4"/>
 <circle class="track" cx="392" cy="20" r="3.4"/>
 <text x="6" y="56">Jupyter</text>
-<text x="492" y="56" text-anchor="end">47.4%</text>
+<text x="492" y="56" text-anchor="end">47.2%</text>
 <circle class="track" cx="164" cy="50" r="3.4"/>
 <circle class="lit" cx="164" cy="50" r="3.4" opacity="1.00"/>
 <circle class="sweep" cx="164" cy="50" r="3.4" style="animation-delay:0.00s"/>
@@ -89,7 +89,7 @@ text { fill:var(--ink); font:20px system-ui,sans-serif; }
 <circle class="lit" cx="260" cy="50" r="3.4" opacity="1.00"/>
 <circle class="sweep" cx="260" cy="50" r="3.4" style="animation-delay:0.56s"/>
 <circle class="track" cx="272" cy="50" r="3.4"/>
-<circle class="lit" cx="272" cy="50" r="3.4" opacity="0.47"/>
+<circle class="lit" cx="272" cy="50" r="3.4" opacity="0.43"/>
 <circle class="track" cx="284" cy="50" r="3.4"/>
 <circle class="track" cx="296" cy="50" r="3.4"/>
 <circle class="track" cx="308" cy="50" r="3.4"/>
@@ -101,7 +101,7 @@ text { fill:var(--ink); font:20px system-ui,sans-serif; }
 <circle class="track" cx="380" cy="50" r="3.4"/>
 <circle class="track" cx="392" cy="50" r="3.4"/>
 <text x="6" y="86">JavaScript</text>
-<text x="492" y="86" text-anchor="end">1.6%</text>
+<text x="492" y="86" text-anchor="end">1.7%</text>
 <circle class="track" cx="164" cy="80" r="3.4"/>
 <circle class="lit" cx="164" cy="80" r="3.4" opacity="0.33"/>
 <circle class="track" cx="176" cy="80" r="3.4"/>
@@ -170,7 +170,7 @@ text { fill:var(--ink); font:20px system-ui,sans-serif; }
 <circle class="track" cx="380" cy="140" r="3.4"/>
 <circle class="track" cx="392" cy="140" r="3.4"/>
 <text x="6" y="176">Other</text>
-<text x="492" y="176" text-anchor="end">&lt;0.1%</text>
+<text x="492" y="176" text-anchor="end">0.2%</text>
 <circle class="track" cx="164" cy="170" r="3.4"/>
 <circle class="lit" cx="164" cy="170" r="3.4" opacity="0.30"/>
 <circle class="track" cx="176" cy="170" r="3.4"/>

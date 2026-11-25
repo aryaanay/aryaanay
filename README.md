@@ -50,11 +50,11 @@ Share of language bytes across my public project repositories.
 | Language | Share |
 | :--- | ---: |
 | TypeScript | 49.0% |
-| Jupyter Notebook | 47.4% |
-| JavaScript | 1.6% |
+| Jupyter Notebook | 47.2% |
+| JavaScript | 1.7% |
 | CSS | 1.5% |
 | PLpgSQL | 0.5% |
-| Other | &lt;0.1% |
+| Other | 0.2% |
 <!-- languages:end -->
 
 </details>
