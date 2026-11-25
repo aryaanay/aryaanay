@@ -6,7 +6,7 @@
 @media (prefers-color-scheme: dark) {
   :root { --ink:#d1dbe5; --quiet:#758696; --copper:#ff936c; }
 }
-text { fill:var(--ink); font:17px system-ui,sans-serif; }
+text { fill:var(--ink); font:20px system-ui,sans-serif; }
 .quiet { fill:var(--quiet); }
 .opened { fill:var(--copper); }
 .release { fill:var(--copper); }
