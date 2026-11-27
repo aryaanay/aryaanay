@@ -112,6 +112,7 @@ flowchart LR
 ## Recent public activity
 
 <!-- activity:start -->
+- **Nov 27, 2026** — Opened repository in [skill-scout](https://github.com/aryaanay/skill-scout)
 - **Nov 24, 2026** — Opened repository in [careerops-public-feed](https://github.com/aryaanay/careerops-public-feed)
 - **Nov 24, 2026** — Updated code in [build-review-release](https://github.com/aryaanay/build-review-release/commits)
 - **Nov 24, 2026** — Opened repository in [build-review-release](https://github.com/aryaanay/build-review-release)
